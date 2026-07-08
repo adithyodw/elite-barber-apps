@@ -56,6 +56,17 @@ export function Footer() {
         <div style={{ textAlign: "center", paddingTop: 26, fontSize: 12.5, color: COLORS.slate }}>
           {dict.footerRights}
         </div>
+        <div style={{ textAlign: "center", paddingTop: 8, fontSize: 12, color: COLORS.slate }}>
+          Website by{" "}
+          <a
+            href="https://adithyodw-portfolio.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: COLORS.red, fontWeight: 700, letterSpacing: ".04em" }}
+          >
+            ADW
+          </a>
+        </div>
       </div>
     </footer>
   );
