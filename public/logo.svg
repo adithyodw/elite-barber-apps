@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Elite Barber Batam emblem">
+  <defs>
+    <clipPath id="poleClip">
+      <rect x="86" y="52" width="28" height="96" rx="14" />
+    </clipPath>
+  </defs>
+
+  <!-- Emblem base -->
+  <circle cx="100" cy="100" r="96" fill="#111111" />
+  <circle cx="100" cy="100" r="96" fill="none" stroke="#E63946" stroke-width="6" />
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.5" />
+
+  <!-- Barber pole -->
+  <rect x="86" y="52" width="28" height="96" rx="14" fill="#FFFFFF" />
+  <g clip-path="url(#poleClip)">
+    <g fill="#E63946">
+      <polygon points="70,52 96,52 60,88 44,88" />
+      <polygon points="102,52 128,52 92,88 76,88" />
+      <polygon points="134,52 160,52 124,88 108,88" />
+      <polygon points="70,100 96,100 60,136 44,136" />
+      <polygon points="102,100 128,100 92,136 76,136" />
+      <polygon points="134,100 160,100 124,136 108,136" />
+      <polygon points="70,148 96,148 78,166 62,166" />
+      <polygon points="102,148 128,148 110,166 94,166" />
+    </g>
+  </g>
+  <rect x="86" y="52" width="28" height="96" rx="14" fill="none" stroke="#111111" stroke-width="3" />
+
+  <!-- Pole caps -->
+  <rect x="80" y="46" width="40" height="10" rx="5" fill="#8E8E93" />
+  <rect x="80" y="144" width="40" height="10" rx="5" fill="#8E8E93" />
+
+  <!-- Crossed razor accents -->
+  <path d="M40 70 L74 96" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.85" />
+  <path d="M160 70 L126 96" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.85" />
+
+  <!-- Wordmark arc -->
+  <path id="arcTop" d="M100 18 m -66 0 a 66 66 0 0 1 132 0" fill="none" />
+  <path id="arcBottom" d="M100 182 m 66 0 a 66 66 0 0 1 -132 0" fill="none" />
+  <text fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-size="15" font-weight="700" letter-spacing="4">
+    <textPath href="#arcTop" startOffset="50%" text-anchor="middle">ELITE</textPath>
+  </text>
+  <text fill="#E63946" font-family="Georgia, 'Times New Roman', serif" font-size="12" font-weight="700" letter-spacing="3">
+    <textPath href="#arcBottom" startOffset="50%" text-anchor="middle">BATAM</textPath>
+  </text>
+</svg>

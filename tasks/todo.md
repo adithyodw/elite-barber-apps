@@ -1,0 +1,22 @@
+# Elite Barber Batam — Task List
+
+- [ ] T1. Scaffold Next.js 14 + TS + Tailwind; archive legacy files to `legacy/`
+- [ ] T2. Tailwind theme tokens + `app/globals.css` brand system
+- [ ] T3. `lib/format.ts` — `formatPrice(amount, from, lang)`
+- [ ] T4. `lib/dictionary.ts` — typed EN/ID UI copy
+- [ ] T5. `lib/menu.ts` — Men + Women menus (EN/ID names + subtitles, IDR integers)
+- [ ] T6. `lib/branches.ts` — Penuin + Bizpark data
+- [ ] T7. `app/providers.tsx` — Language + Branch Context
+- [ ] T8. `app/layout.tsx` — fonts, metadata, JSON-LD @graph
+- [ ] T9. `components/Logo.tsx` + `public/logo.svg` emblem
+- [ ] T10. `components/Header.tsx` — sticky glass, branch + language segmented pills
+- [ ] T11. `components/Hero.tsx` — headline, dual CTAs
+- [ ] T12. `components/Marquee.tsx` — red infinite scroll strip
+- [ ] T13. `components/Menu.tsx` — swipeable tabs, spacious rows, footnote
+- [ ] T14. `components/BranchSelector.tsx` — two cards, Directions + WhatsApp
+- [ ] T15. `components/SocialHub.tsx` — Instagram tiles (SVG line-art)
+- [ ] T16. `components/Footer.tsx`
+- [ ] T17. `components/WhatsAppFab.tsx` — floating FAB, safe-area inset
+- [ ] T18. `app/page.tsx` — assemble
+- [ ] T19. Verify: `npm install`, `next build`, lint
+- [ ] T20. Ship: git init, commit, push to GitHub
