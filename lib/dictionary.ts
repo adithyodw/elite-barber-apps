@@ -1,167 +1,75 @@
 import type { Lang } from "./i18n";
 
 export interface Dictionary {
-  brand: { studio: string };
-  header: { branchLabel: string; langLabel: string };
-  hero: {
-    kicker: string;
-    titleTop: string;
-    titleAccent: string;
-    subcopy: string;
-    ctaBook: string;
-    ctaBranch: string;
-  };
-  marquee: string[];
-  menu: {
-    title: string;
-    subtitle: string;
-    tabMen: string;
-    tabWomen: string;
-    footnote: string;
-  };
-  branches: {
-    title: string;
-    subtitle: string;
-    directions: string;
-    book: string;
-    activeTag: string;
-    addressLabel: string;
-  };
-  social: {
-    title: string;
-    subtitle: string;
-    button: string;
-    caption: string;
-    tiles: string[];
-  };
-  footer: { tagline: string; book: string; rights: string };
-  whatsapp: { fabLabel: string; message: string };
+  heroKicker: string;
+  heroL1: string;
+  heroL2: string;
+  heroSub: string;
+  heroCta1: string;
+  heroCta2: string;
+  menuKicker: string;
+  menuTitle: string;
+  tabMen: string;
+  tabWomen: string;
+  branchesKicker: string;
+  branchesTitle: string;
+  branchDirections: string;
+  branchBook: string;
+  igKicker: string;
+  igTitle: string;
+  tagline: string;
+  footerRights: string;
+  footnote: string;
 }
 
 const en: Dictionary = {
-  brand: { studio: "Hair Studio · Batam" },
-  header: { branchLabel: "Branch", langLabel: "Language" },
-  hero: {
-    kicker: "Batam's Premier Grooming House",
-    titleTop: "Look Your",
-    titleAccent: "Best.",
-    subcopy:
-      "Precision cuts, hot-towel shaves, and luxury studio styling — an international grooming experience across two premier Batam locations.",
-    ctaBook: "Book Appointment",
-    ctaBranch: "Find Nearest Branch",
-  },
-  marquee: [
-    "Precision Cuts",
-    "Hot-Towel Shaves",
-    "Signature Pomade",
-    "Luxury Studio Styling",
-    "Man Hair Spa",
-    "Couture Colour",
-    "Look Your Best",
-  ],
-  menu: {
-    title: "The Menu",
-    subtitle: "Two studios. One standard of excellence.",
-    tabMen: "Men's Grooming",
-    tabWomen: "Women's Studio",
-    footnote:
-      "Prices may vary based on hair length and thickness. A complimentary consultation with our master stylists is highly recommended before technical treatments.",
-  },
-  branches: {
-    title: "Two Premier Locations",
-    subtitle: "Find the studio nearest you and book in seconds.",
-    directions: "Directions",
-    book: "Book via WhatsApp",
-    activeTag: "Selected",
-    addressLabel: "Address",
-  },
-  social: {
-    title: "Inside the Studio",
-    subtitle: "Fresh work, daily. Follow the craft on Instagram.",
-    button: "@elit3barber.official",
-    caption: "Tap any tile to open our live feed on Instagram",
-    tiles: [
-      "Signature Fades",
-      "Editorial Styling",
-      "The Barber Pole",
-      "Couture Colour",
-      "Hot-Towel Shave",
-      "Beard Sculpting",
-    ],
-  },
-  footer: {
-    tagline: "Look Your Best.",
-    book: "Book via WhatsApp",
-    rights: "All rights reserved.",
-  },
-  whatsapp: {
-    fabLabel: "Book via WhatsApp",
-    message:
-      "Hello Elite Barber Batam, I'd like to book an appointment. My preferred branch is ",
-  },
+  heroKicker: "Batam's Premier Grooming House",
+  heroL1: "Look Your",
+  heroL2: "Best.",
+  heroSub:
+    "Precision cuts, hot-towel shaves and luxury studio styling — crafted for the modern gentleman and the discerning woman.",
+  heroCta1: "Book Appointment",
+  heroCta2: "Find Nearest Branch",
+  menuKicker: "Price List",
+  menuTitle: "The Menu",
+  tabMen: "Men's Grooming",
+  tabWomen: "Women's Studio",
+  branchesKicker: "Two Locations",
+  branchesTitle: "Find Your Studio",
+  branchDirections: "Directions",
+  branchBook: "Book via WhatsApp",
+  igKicker: "Follow the Craft",
+  igTitle: "On Instagram",
+  tagline: "Look Your Best",
+  footerRights:
+    "© 2026 Elite Barber Batam · Elite Hair Studio. All rights reserved.",
+  footnote:
+    "Prices may vary based on hair length and thickness. A complimentary consultation with our master stylists is highly recommended before technical treatments.",
 };
 
 const id: Dictionary = {
-  brand: { studio: "Hair Studio · Batam" },
-  header: { branchLabel: "Cabang", langLabel: "Bahasa" },
-  hero: {
-    kicker: "Rumah Grooming Premier di Batam",
-    titleTop: "Look Your",
-    titleAccent: "Best.",
-    subcopy:
-      "Potongan presisi, cukur handuk panas, dan penataan studio mewah — pengalaman grooming berkelas internasional di dua lokasi utama di Batam.",
-    ctaBook: "Buat Janji",
-    ctaBranch: "Cari Cabang Terdekat",
-  },
-  marquee: [
-    "Potongan Presisi",
-    "Cukur Handuk Panas",
-    "Pomade Signature",
-    "Penataan Studio Mewah",
-    "Hair Spa Pria",
-    "Warna Couture",
-    "Look Your Best",
-  ],
-  menu: {
-    title: "Daftar Layanan",
-    subtitle: "Dua studio. Satu standar keunggulan.",
-    tabMen: "Grooming Pria",
-    tabWomen: "Studio Wanita",
-    footnote:
-      "Harga dapat berubah sesuai panjang & ketebalan rambut. Konsultasi sebelum treatment sangat disarankan.",
-  },
-  branches: {
-    title: "Dua Lokasi Utama",
-    subtitle: "Temukan studio terdekat dan buat janji dalam hitungan detik.",
-    directions: "Petunjuk Arah",
-    book: "Booking via WhatsApp",
-    activeTag: "Dipilih",
-    addressLabel: "Alamat",
-  },
-  social: {
-    title: "Di Dalam Studio",
-    subtitle: "Karya terbaru setiap hari. Ikuti prosesnya di Instagram.",
-    button: "@elit3barber.official",
-    caption: "Ketuk tile mana pun untuk membuka feed langsung kami di Instagram",
-    tiles: [
-      "Fade Signature",
-      "Penataan Editorial",
-      "Tiang Barber",
-      "Warna Couture",
-      "Cukur Handuk Panas",
-      "Bentuk Janggut",
-    ],
-  },
-  footer: {
-    tagline: "Look Your Best.",
-    book: "Booking via WhatsApp",
-    rights: "Hak cipta dilindungi.",
-  },
-  whatsapp: {
-    fabLabel: "Booking via WhatsApp",
-    message:
-      "Halo Elite Barber Batam, saya ingin membuat janji. Cabang pilihan saya adalah ",
-  },
+  heroKicker: "Rumah Grooming Premium Batam",
+  heroL1: "Look Your",
+  heroL2: "Best.",
+  heroSub:
+    "Potongan presisi, cukur handuk panas, dan styling studio mewah — untuk pria modern dan wanita berkelas.",
+  heroCta1: "Buat Janji",
+  heroCta2: "Cabang Terdekat",
+  menuKicker: "Daftar Harga",
+  menuTitle: "Menu Layanan",
+  tabMen: "Grooming Pria",
+  tabWomen: "Studio Wanita",
+  branchesKicker: "Dua Lokasi",
+  branchesTitle: "Temukan Studio Anda",
+  branchDirections: "Petunjuk Arah",
+  branchBook: "Booking via WhatsApp",
+  igKicker: "Ikuti Karyanya",
+  igTitle: "Di Instagram",
+  tagline: "Look Your Best",
+  footerRights:
+    "© 2026 Elite Barber Batam · Elite Hair Studio. Hak cipta dilindungi.",
+  footnote:
+    "Harga dapat berubah sesuai panjang & ketebalan rambut. Konsultasi dengan master stylist kami sangat disarankan sebelum treatment teknis.",
 };
 
 export const dictionaries: Record<Lang, Dictionary> = { en, id };

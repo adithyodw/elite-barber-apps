@@ -1,31 +1,51 @@
-"use client";
+import { SERIF } from "@/lib/theme";
 
-import { useApp } from "@/app/providers";
+const NB = "\u00A0";
+const G = NB + NB;
+const PHRASE =
+  G +
+  [
+    "Precision Cuts",
+    "Hot-Towel Shaves",
+    "Signature Pomade",
+    "Luxury Studio Styling",
+    "Man Hair Spa",
+    "Couture Colour",
+    "Look Your Best",
+  ].join(`${G}·${G}`) +
+  `${G}·${G}`;
+
+const spanStyle = {
+  fontFamily: SERIF,
+  fontStyle: "italic" as const,
+  fontWeight: 600,
+  fontSize: 15,
+  letterSpacing: ".05em",
+  color: "#fff",
+};
 
 export function Marquee() {
-  const { dict } = useApp();
-  const phrases = dict.marquee;
-
-  const Track = () => (
-    <div className="flex shrink-0 items-center">
-      {phrases.map((phrase, i) => (
-        <span key={i} className="flex items-center">
-          <span className="px-5 font-serif text-lg italic text-white sm:text-xl">
-            {phrase}
-          </span>
-          <span className="text-white/50" aria-hidden="true">
-            ·
-          </span>
-        </span>
-      ))}
-    </div>
-  );
-
   return (
-    <div className="overflow-hidden bg-red py-3" aria-hidden="true">
-      <div className="flex w-max animate-marquee">
-        <Track />
-        <Track />
+    <div
+      aria-hidden="true"
+      style={{
+        background: "#E63946",
+        overflow: "hidden",
+        padding: "13px 0",
+        borderTop: "1px solid rgba(255,255,255,.15)",
+        borderBottom: "1px solid rgba(0,0,0,.2)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          width: "max-content",
+          animation: "marquee 26s linear infinite",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <span style={spanStyle}>{PHRASE}</span>
+        <span style={spanStyle}>{PHRASE}</span>
       </div>
     </div>
   );

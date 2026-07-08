@@ -1,87 +1,100 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useApp } from "@/app/providers";
 import { branches } from "@/lib/branches";
-import type { Lang } from "@/lib/i18n";
+import { SANS, COLORS } from "@/lib/theme";
 import { LogoChip, Wordmark } from "./Logo";
 
-function Segment({
-  active,
-  onClick,
-  label,
-  srLabel,
-}: {
-  active: boolean;
-  onClick: () => void;
-  label: string;
-  srLabel?: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={[
-        "rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide transition-colors duration-200",
-        active
-          ? "bg-red text-white shadow-[0_2px_10px_rgba(230,57,70,0.45)]"
-          : "text-slate hover:text-white",
-      ].join(" ")}
-    >
-      {label}
-      {srLabel ? <span className="sr-only"> {srLabel}</span> : null}
-    </button>
-  );
+function seg(active: boolean): CSSProperties {
+  return {
+    border: "none",
+    cursor: "pointer",
+    fontFamily: SANS,
+    fontWeight: 700,
+    fontSize: 12,
+    letterSpacing: ".03em",
+    padding: "7px 13px",
+    borderRadius: 999,
+    transition: "all .2s",
+    background: active ? COLORS.red : "transparent",
+    color: active ? "#fff" : "rgba(255,255,255,.6)",
+  };
 }
 
-export function Header() {
-  const { lang, setLang, branchId, setBranchId, dict } = useApp();
+const groupStyle: CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  background: "rgba(255,255,255,.06)",
+  border: `1px solid ${COLORS.line}`,
+  borderRadius: 999,
+  padding: 3,
+};
 
-  const langs: { id: Lang; label: string }[] = [
-    { id: "en", label: "EN" },
-    { id: "id", label: "ID" },
-  ];
+export function Header() {
+  const { lang, setLang, branchIndex, setBranchIndex } = useApp();
 
   return (
-    <header className="glass fixed inset-x-0 top-0 z-50 border-b border-white/10">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
-        <a href="#top" className="flex items-center gap-3" aria-label="Elite Barber Batam home">
-          <LogoChip size={42} />
-          <span className="hidden sm:block">
-            <Wordmark studio={dict.brand.studio} />
-          </span>
+    <header
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 60,
+        backdropFilter: "blur(22px)",
+        WebkitBackdropFilter: "blur(22px)",
+        background: "rgba(17,17,17,.72)",
+        borderBottom: `1px solid ${COLORS.line}`,
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1180,
+          margin: "0 auto",
+          padding: "10px clamp(16px,4vw,40px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 14,
+        }}
+      >
+        <a href="#top" style={{ display: "flex", alignItems: "center", gap: 11, minWidth: 0 }}>
+          <LogoChip size={46} img={40} priority />
+          <Wordmark />
         </a>
 
-        <div className="flex items-center gap-2">
-          <div
-            role="group"
-            aria-label={dict.header.branchLabel}
-            className="flex items-center rounded-full bg-white/5 p-0.5 ring-1 ring-white/10"
-          >
-            {branches.map((b) => (
-              <Segment
-                key={b.id}
-                active={branchId === b.id}
-                onClick={() => setBranchId(b.id)}
-                label={b.name[lang]}
-              />
+        <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+          <div style={groupStyle} role="group" aria-label="Branch">
+            {branches.map((b, i) => (
+              <button
+                key={b.short}
+                type="button"
+                onClick={() => setBranchIndex(i)}
+                aria-pressed={branchIndex === i}
+                title={b.name}
+                style={seg(branchIndex === i)}
+              >
+                {b.short}
+              </button>
             ))}
           </div>
 
-          <div
-            role="group"
-            aria-label={dict.header.langLabel}
-            className="flex items-center rounded-full bg-white/5 p-0.5 ring-1 ring-white/10"
-          >
-            {langs.map((l) => (
-              <Segment
-                key={l.id}
-                active={lang === l.id}
-                onClick={() => setLang(l.id)}
-                label={l.label}
-                srLabel={l.id === "en" ? "English" : "Bahasa Indonesia"}
-              />
-            ))}
+          <div style={groupStyle} role="group" aria-label="Language">
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              aria-pressed={lang === "en"}
+              style={seg(lang === "en")}
+            >
+              EN
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang("id")}
+              aria-pressed={lang === "id"}
+              style={seg(lang === "id")}
+            >
+              ID
+            </button>
           </div>
         </div>
       </div>

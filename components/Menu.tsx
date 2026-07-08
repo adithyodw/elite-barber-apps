@@ -1,118 +1,228 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { useApp } from "@/app/providers";
 import { menu } from "@/lib/menu";
-import { formatPrice } from "@/lib/format";
+import { SERIF, SANS, COLORS } from "@/lib/theme";
 
-const SWIPE_THRESHOLD = 55;
+function tabStyle(active: boolean): CSSProperties {
+  return {
+    flex: 1,
+    border: "none",
+    cursor: "pointer",
+    fontFamily: SANS,
+    fontWeight: 700,
+    fontSize: "clamp(13px,2vw,15px)",
+    letterSpacing: ".01em",
+    padding: "13px 14px",
+    borderRadius: 999,
+    transition: "all .25s",
+    background: active ? COLORS.red : "transparent",
+    color: active ? "#fff" : "rgba(255,255,255,.65)",
+    boxShadow: active ? "0 6px 18px rgba(230,57,70,.4)" : "none",
+  };
+}
 
 export function Menu() {
-  const { dict, lang } = useApp();
-  const [active, setActive] = useState(0);
-  const touchStartX = useRef<number | null>(null);
+  const { dict, lang, fmt } = useApp();
+  const [tab, setTab] = useState<"men" | "women">("men");
+  const tx = useRef<number | null>(null);
 
-  const tabLabels = [dict.menu.tabMen, dict.menu.tabWomen];
-  const tab = menu[active];
+  const active = menu[tab];
 
   const onTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.changedTouches[0]?.clientX ?? null;
+    tx.current = e.touches[0]?.clientX ?? null;
   };
   const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const delta = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
-    if (Math.abs(delta) > SWIPE_THRESHOLD) {
-      if (delta < 0 && active < menu.length - 1) setActive(active + 1);
-      if (delta > 0 && active > 0) setActive(active - 1);
-    }
-    touchStartX.current = null;
+    if (tx.current == null) return;
+    const dx = (e.changedTouches[0]?.clientX ?? 0) - tx.current;
+    if (Math.abs(dx) > 55) setTab(dx < 0 ? "women" : "men");
+    tx.current = null;
   };
 
   return (
-    <section id="menu" className="bg-bone py-20 text-ink sm:py-28">
-      <div className="mx-auto max-w-3xl px-5 sm:px-6">
-        <div className="text-center">
-          <h2 className="font-serif text-[clamp(2.25rem,7vw,3.5rem)] font-bold leading-tight">
-            {dict.menu.title}
-          </h2>
-          <p className="mt-3 text-[15px] text-ink/55">{dict.menu.subtitle}</p>
-        </div>
-
-        {/* Tabs */}
-        <div className="mt-9 flex justify-center">
+    <section
+      id="menu"
+      style={{
+        background: COLORS.bone,
+        color: COLORS.ink,
+        padding: "clamp(56px,9vw,110px) clamp(16px,4vw,40px)",
+      }}
+    >
+      <div style={{ maxWidth: 820, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 38 }}>
           <div
-            role="tablist"
-            aria-label={dict.menu.title}
-            className="flex items-center rounded-full bg-ink/5 p-1 ring-1 ring-ink/10"
+            style={{
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: ".3em",
+              textTransform: "uppercase",
+              color: COLORS.red,
+              marginBottom: 14,
+            }}
           >
-            {tabLabels.map((label, i) => (
-              <button
-                key={label}
-                role="tab"
-                aria-selected={active === i}
-                onClick={() => setActive(i)}
-                className={[
-                  "rounded-full px-5 py-2.5 text-[13px] font-bold tracking-wide transition-colors duration-200 sm:text-sm",
-                  active === i
-                    ? "bg-ink text-white"
-                    : "text-ink/60 hover:text-ink",
-                ].join(" ")}
-              >
-                {label}
-              </button>
-            ))}
+            {dict.menuKicker}
           </div>
+          <h2
+            style={{
+              fontFamily: SERIF,
+              fontWeight: 800,
+              fontSize: "clamp(2.4rem,7vw,4rem)",
+              lineHeight: 1,
+              margin: 0,
+              color: COLORS.ink,
+            }}
+          >
+            {dict.menuTitle}
+          </h2>
         </div>
 
-        <p className="mt-6 text-center font-serif text-lg italic text-red">
-          {tab.brand[lang]}
-        </p>
-
-        {/* Rows */}
         <div
-          className="mt-4 animate-fadeUp"
-          key={tab.id}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
+          role="tablist"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 8,
+            marginBottom: 8,
+            background: "#111",
+            borderRadius: 999,
+            padding: 6,
+            maxWidth: 440,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
         >
-          {tab.categories.map((category) => (
-            <div key={category.id}>
-              <div className="mb-1 mt-10 flex items-center gap-4">
-                <h3 className="text-[12px] font-bold uppercase tracking-[0.2em] text-ink/45">
-                  {category.label[lang]}
+          <button
+            role="tab"
+            aria-selected={tab === "men"}
+            onClick={() => setTab("men")}
+            style={tabStyle(tab === "men")}
+          >
+            {dict.tabMen}
+          </button>
+          <button
+            role="tab"
+            aria-selected={tab === "women"}
+            onClick={() => setTab("women")}
+            style={tabStyle(tab === "women")}
+          >
+            {dict.tabWomen}
+          </button>
+        </div>
+
+        <div
+          style={{
+            textAlign: "center",
+            fontFamily: SERIF,
+            fontStyle: "italic",
+            fontSize: 16,
+            color: COLORS.slate,
+            margin: "16px 0 34px",
+          }}
+        >
+          {active.brand[lang]}
+        </div>
+
+        <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+          {active.categories.map((cat) => (
+            <div key={cat.name.en} style={{ marginBottom: 44 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20 }}>
+                <h3
+                  style={{
+                    fontFamily: SANS,
+                    fontWeight: 800,
+                    fontSize: 13,
+                    letterSpacing: ".22em",
+                    textTransform: "uppercase",
+                    color: COLORS.ink,
+                    margin: 0,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {cat.name[lang]}
                 </h3>
-                <span className="h-px flex-1 bg-ink/12" />
+                <span style={{ flex: 1, height: 1, background: "rgba(17,17,17,.14)" }} />
               </div>
 
-              <ul>
-                {category.items.map((item) => (
-                  <li
-                    key={item.id}
-                    className="flex items-start justify-between gap-6 border-b border-ink/[0.08] py-4"
-                  >
-                    <div className="min-w-0">
-                      <p className="text-[16px] font-semibold text-ink">
-                        {item.name[lang]}
-                      </p>
-                      {item.subtitle ? (
-                        <p className="mt-1 max-w-md text-[13px] leading-relaxed text-ink/55">
-                          {item.subtitle[lang]}
-                        </p>
-                      ) : null}
+              {cat.items.map((it) => (
+                <div
+                  key={it.name.en}
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    gap: 16,
+                    padding: "16px 0",
+                    borderBottom: "1px solid rgba(17,17,17,.08)",
+                  }}
+                >
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div
+                      style={{
+                        fontWeight: 700,
+                        fontSize: "clamp(16px,2.4vw,19px)",
+                        color: COLORS.ink,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {it.name[lang]}
                     </div>
-                    <p className="tabular whitespace-nowrap pt-0.5 text-[15px] font-bold text-red">
-                      {formatPrice(item.price, item.from ?? false, lang)}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+                    {it.subtitle ? (
+                      <div
+                        style={{
+                          fontSize: 13.5,
+                          lineHeight: 1.5,
+                          color: COLORS.slate,
+                          marginTop: 5,
+                          maxWidth: "52ch",
+                        }}
+                      >
+                        {it.subtitle[lang]}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div
+                    style={{
+                      fontWeight: 800,
+                      fontSize: "clamp(15px,2.2vw,18px)",
+                      color: COLORS.red,
+                      whiteSpace: "nowrap",
+                      letterSpacing: "-.01em",
+                      fontVariantNumeric: "tabular-nums",
+                    }}
+                  >
+                    {fmt(it.price, it.from)}
+                  </div>
+                </div>
+              ))}
             </div>
           ))}
 
-          {/* Footnote */}
-          <div className="mt-12 rounded-card border border-ink/10 bg-white/60 p-5">
-            <p className="text-center text-[12.5px] leading-relaxed text-ink/60">
-              {dict.menu.footnote}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: 12,
+              marginTop: 14,
+              padding: "20px 22px",
+              background: "#fff",
+              border: "1px solid rgba(17,17,17,.08)",
+              borderRadius: 16,
+            }}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#E63946"
+              strokeWidth="2"
+              style={{ flexShrink: 0, marginTop: 1 }}
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4M12 8h.01" />
+            </svg>
+            <p style={{ margin: 0, fontSize: 13, lineHeight: 1.6, color: "#555", fontStyle: "italic" }}>
+              {dict.footnote}
             </p>
           </div>
         </div>

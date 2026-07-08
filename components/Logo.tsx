@@ -1,38 +1,75 @@
 import Image from "next/image";
+import { SANS, COLORS } from "@/lib/theme";
 
-export function LogoChip({ size = 46 }: { size?: number }) {
-  const pad = Math.round(size * 0.1);
+export function LogoChip({
+  size = 46,
+  img = 40,
+  shadow = "0 2px 12px rgba(0,0,0,.45)",
+  priority = false,
+}: {
+  size?: number;
+  img?: number;
+  shadow?: string;
+  priority?: boolean;
+}) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-black/10"
-      style={{ width: size, height: size, padding: pad }}
-      aria-hidden="true"
+      style={{
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        background: "#fff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+        boxShadow: shadow,
+      }}
     >
       <Image
-        src="/logo.svg"
-        alt=""
-        width={size - pad * 2}
-        height={size - pad * 2}
-        priority
+        src="/logo.png"
+        alt="Elite Barber Batam logo"
+        width={img}
+        height={img}
+        priority={priority}
+        style={{ width: img, height: img, objectFit: "contain", display: "block" }}
       />
     </span>
   );
 }
 
-/** Editorial wordmark: ELIT + reversed red E + BARBER. */
-export function Wordmark({ studio }: { studio?: string }) {
+export function Wordmark() {
   return (
-    <span className="flex flex-col leading-none">
-      <span className="font-serif text-[19px] font-extrabold tracking-[0.06em] text-white sm:text-[21px]">
+    <span style={{ display: "flex", flexDirection: "column", lineHeight: 1, minWidth: 0 }}>
+      <span
+        style={{
+          fontFamily: SANS,
+          fontWeight: 800,
+          letterSpacing: ".18em",
+          fontSize: 15,
+          color: "#fff",
+          whiteSpace: "nowrap",
+        }}
+      >
         ELIT
-        <span className="inline-block -scale-x-100 text-red">E</span>
-        <span className="ml-[0.28em] font-bold">BARBER</span>
+        <span style={{ color: COLORS.red, display: "inline-block", transform: "scaleX(-1)" }}>
+          E
+        </span>{" "}
+        BARBER
       </span>
-      {studio ? (
-        <span className="mt-1 font-sans text-[9.5px] font-semibold uppercase tracking-[0.34em] text-slate">
-          {studio}
-        </span>
-      ) : null}
+      <span
+        style={{
+          fontFamily: SANS,
+          fontWeight: 500,
+          letterSpacing: ".32em",
+          fontSize: 8.5,
+          color: COLORS.slate,
+          marginTop: 5,
+          whiteSpace: "nowrap",
+        }}
+      >
+        HAIR STUDIO · BATAM
+      </span>
     </span>
   );
 }

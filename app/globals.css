@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -27,13 +22,44 @@ body {
 }
 
 a {
-  color: inherit;
+  color: #e63946;
   text-decoration: none;
+}
+a:hover {
+  color: #f26471;
 }
 
 ::selection {
   background: #e63946;
   color: #fff;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes floatPulse {
+  0%,
+  100% {
+    box-shadow: 0 8px 30px rgba(230, 57, 70, 0.45);
+  }
+  50% {
+    box-shadow: 0 8px 44px rgba(230, 57, 70, 0.75);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -47,16 +73,59 @@ a {
   }
 }
 
-@layer utilities {
-  .tabular {
-    font-variant-numeric: tabular-nums;
-  }
-  .hairline {
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  .glass {
-    background: rgba(17, 17, 17, 0.7);
-    backdrop-filter: saturate(140%) blur(20px);
-    -webkit-backdrop-filter: saturate(140%) blur(20px);
-  }
+/* Interactive elements — base + hover kept in CSS so hover reliably
+   overrides (inline styles would otherwise win). */
+.eb-btn-red {
+  background: #e63946;
+  color: #fff;
+  transition: background 0.2s, transform 0.2s;
+}
+.eb-btn-red:hover {
+  background: #c92c39;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.eb-btn-glass {
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.2s;
+}
+.eb-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.eb-btn-maps {
+  background: rgba(255, 255, 255, 0.05);
+  transition: background 0.2s;
+}
+.eb-btn-maps:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.eb-btn-white {
+  background: #fff;
+  color: #111;
+  transition: transform 0.2s;
+}
+.eb-btn-white:hover {
+  transform: translateY(-2px);
+  color: #111;
+}
+
+.eb-tile {
+  transition: transform 0.3s, border-color 0.3s;
+}
+.eb-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(230, 57, 70, 0.6);
+}
+
+.eb-fab {
+  animation: floatPulse 2.6s ease-in-out infinite;
+  transition: transform 0.2s;
+}
+.eb-fab:hover {
+  transform: scale(1.06);
 }
