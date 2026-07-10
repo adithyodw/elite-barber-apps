@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useApp } from "@/app/providers";
-import { menu } from "@/lib/menu";
+import { getMenu } from "@/lib/menu";
 import { SERIF, SANS, COLORS } from "@/lib/theme";
 
 function tabStyle(active: boolean): CSSProperties {
@@ -24,11 +24,15 @@ function tabStyle(active: boolean): CSSProperties {
 }
 
 export function Menu() {
-  const { dict, lang, fmt } = useApp();
+  const { dict, lang, fmt, branchIndex } = useApp();
   const [tab, setTab] = useState<"men" | "women">("men");
   const tx = useRef<number | null>(null);
 
-  const active = menu[tab];
+  useEffect(() => {
+    if (branchIndex === 1) setTab("women");
+  }, [branchIndex]);
+
+  const active = getMenu(branchIndex, tab);
 
   const onTouchStart = (e: React.TouchEvent) => {
     tx.current = e.touches[0]?.clientX ?? null;

@@ -42,13 +42,13 @@ export function Wordmark() {
   return (
     <span style={{ display: "flex", flexDirection: "column", lineHeight: 1, minWidth: 0 }}>
       <span
+        className="site-header__wordmark-main"
         style={{
           fontFamily: SANS,
           fontWeight: 800,
           letterSpacing: ".18em",
           fontSize: 15,
           color: "#fff",
-          whiteSpace: "nowrap",
         }}
       >
         ELIT
@@ -58,6 +58,7 @@ export function Wordmark() {
         BARBER
       </span>
       <span
+        className="site-header__wordmark-sub"
         style={{
           fontFamily: SANS,
           fontWeight: 500,
@@ -65,7 +66,6 @@ export function Wordmark() {
           fontSize: 8.5,
           color: COLORS.slate,
           marginTop: 5,
-          whiteSpace: "nowrap",
         }}
       >
         HAIR STUDIO · BATAM

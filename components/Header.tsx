@@ -47,27 +47,25 @@ export function Header() {
       }}
     >
       <div
+        className="site-header__inner"
         style={{
           maxWidth: 1180,
           margin: "0 auto",
           padding: "10px clamp(16px,4vw,40px)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 14,
         }}
       >
-        <a href="#top" style={{ display: "flex", alignItems: "center", gap: 11, minWidth: 0 }}>
+        <a href="#top" className="site-header__brand">
           <LogoChip size={46} img={40} priority />
           <Wordmark />
         </a>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+        <div className="site-header__controls">
           <div style={groupStyle} role="group" aria-label="Branch">
             {branches.map((b, i) => (
               <button
                 key={b.short}
                 type="button"
+                className="site-header__seg"
                 onClick={() => setBranchIndex(i)}
                 aria-pressed={branchIndex === i}
                 title={b.name}
@@ -81,6 +79,7 @@ export function Header() {
           <div style={groupStyle} role="group" aria-label="Language">
             <button
               type="button"
+              className="site-header__seg"
               onClick={() => setLang("en")}
               aria-pressed={lang === "en"}
               style={seg(lang === "en")}
@@ -89,6 +88,7 @@ export function Header() {
             </button>
             <button
               type="button"
+              className="site-header__seg"
               onClick={() => setLang("id")}
               aria-pressed={lang === "id"}
               style={seg(lang === "id")}

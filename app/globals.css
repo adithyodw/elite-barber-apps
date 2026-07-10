@@ -129,3 +129,68 @@ a:hover {
 .eb-fab:hover {
   transform: scale(1.06);
 }
+
+/* Header — prevent branch/language pills overlapping logo on narrow phones */
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.site-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .site-header__inner {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .site-header__brand {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .site-header__controls {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .site-header__seg {
+    font-size: 11px !important;
+    padding: 6px 10px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header__wordmark-main {
+    font-size: 13px !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .site-header__wordmark-sub {
+    font-size: 7.5px !important;
+    letter-spacing: 0.26em !important;
+  }
+
+  .site-header__seg {
+    font-size: 10px !important;
+    padding: 5px 8px !important;
+  }
+}
